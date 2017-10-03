@@ -4,8 +4,9 @@ export class Main {
     private action$: Subscription
 
     constructor() {
-        this.action$ = Observable.from([1, 2, 3])
-            .map(x => x)
+        this.action$ = Observable.interval(1000)
+            .startWith(0)
+            .map(() => 'tick')
             .subscribe(
                 x => console.log(x),
                 err => console.error(err),
@@ -13,10 +14,7 @@ export class Main {
             )
     }
 
-    start() {
-        
-    }
+    start() {}
 }
 
 const app = new Main()
-app.start()

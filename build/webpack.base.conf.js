@@ -10,19 +10,16 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['', '.js', '.ts'],
+    extensions: ['.js', '.ts'],
     alias: {
       'src': path.resolve(__dirname, '../src')
     }
-  },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
   },
   module: {
     loaders: [
       {
         test: /\.html$/,
-        loader: "html"
+        loader: "html-loader"
       },
       {
         test: /\.css$/,
@@ -31,10 +28,6 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'ts-loader'
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue'
       },
       {
         test: /\.js$/,
@@ -54,16 +47,5 @@ module.exports = {
         }
       }
     ]
-  },
-  vue: {
-    loaders: {
-      js: 'babel!eslint'
-    }
-  },
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
-  },
-  ts: {
-      experimentalDecorators: true
   }
 }
