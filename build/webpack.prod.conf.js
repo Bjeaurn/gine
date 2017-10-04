@@ -21,17 +21,7 @@ function generateExtractLoaders (loaders) {
   }).join('!')
 }
 
-config.vue.loaders = {
-  js: 'babel!eslint',
-  // http://vuejs.github.io/vue-loader/configurations/extract-css.html
-  css: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css'])),
-  less: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css', 'less'])),
-  sass: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css', 'sass'])),
-  stylus: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css', 'stylus']))
-}
-
 config.plugins = (config.plugins || []).concat([
-  // http://vuejs.github.io/vue-loader/workflow/production.html
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: '"production"'
@@ -42,7 +32,7 @@ config.plugins = (config.plugins || []).concat([
       warnings: false
     }
   }),
-  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.OccurrenceOrderPlugin(),
   // extract css into its own file
   new ExtractTextPlugin('[name].[contenthash].css'),
   // generate dist index.html with correct asset hash for caching.
