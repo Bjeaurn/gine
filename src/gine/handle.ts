@@ -1,11 +1,9 @@
-import { GineImage, Image, Sprite } from './image'
+import { Asset, ImageAsset, SpriteAsset } from './image'
 import {Font} from './text';
 import { CONFIG } from '../config'
 
 export class Handle { 
-    constructor(readonly handle: CanvasRenderingContext2D) {
-        if(this.handle === null) throw "No 2D Context on Canvas."        
-    }
+    constructor(readonly handle: CanvasRenderingContext2D) {}
 
     clear() {
         this.handle.clearRect(0, 0, CONFIG.width, CONFIG.height)
@@ -24,12 +22,11 @@ export class Handle {
         this.handle.fillStyle = 'rgba('+red+','+green+','+blue+','+alpha+')'
     }
 
-    draw(image: GineImage, x: number, y: number) {
-        // Needs a sprite implementation!
+    draw(image: Asset, x: number, y: number) {
         this.handle.drawImage(image, x, y)
     }
 
-    rotate(image: GineImage, degrees?: number) {
+    rotateImage(image: Asset, degrees?: number) {
         if(!degrees) degrees = 0
         const radians = degrees * Math.PI / 180
         // COME BACK TO THIS LATER, FIGURE OUT THE `BUFFERHANDLE`
@@ -37,5 +34,9 @@ export class Handle {
 
     resetColor() {
         this.setColor(0, 0, 0)
+    }
+
+    scale(scale: number) {
+        this.handle.scale(scale, scale)
     }
 }

@@ -1,38 +1,30 @@
-var path = require('path')
+var webpack = require('webpack'),
+    path = require('path');
+
+var libraryName = 'gine2',
+    outputFile = 'index.js';
 
 module.exports = {
   entry: {
-    app: './src/main.ts'
+    index: './src/index.ts'
   },
   output: {
-    path: path.resolve(__dirname, '../dist/static'),
-    publicPath: '/static/',
-    filename: '[name].js'
+    path: path.resolve('./dist/'),
+    filename: '[name].js',
+    library: libraryName,
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
+  devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.ts'],
-    alias: {
-      'src': path.resolve(__dirname, '../src')
-    }
+    extensions: ['.js', '.ts' ],
   },
+  externals: [ 'rxjs' ],
   module: {
     loaders: [
       {
-        test: /\.html$/,
-        loader: "html-loader"
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css'
-      },
-      {
         test: /\.ts$/,
         loader: 'ts-loader'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel!eslint',
-        exclude: /node_modules/
       },
       {
         test: /\.json$/,
@@ -47,5 +39,11 @@ module.exports = {
         }
       }
     ]
-  }
-}
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      names: 'gine'
+    })
+  ],
+
+};

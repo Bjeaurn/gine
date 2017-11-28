@@ -1,6 +1,7 @@
 var webpack = require('webpack')
 var config = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 // eval-source-map is faster for development
 config.devtool = 'eval-source-map'
@@ -26,7 +27,8 @@ config.plugins = (config.plugins || []).concat([
     filename: 'index.html',
     template: 'src/index.html',
     inject: true
-  })
+  }),
+  new CopyWebpackPlugin([ { from: 'src/assets', to: 'assets' } ])  
 ])
 
 module.exports = config
