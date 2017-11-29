@@ -1,4 +1,4 @@
-import { CONFIG } from '../config'
+import { CONFIG } from './config'
 import { Handle } from './handle';
 
 export class Camera {

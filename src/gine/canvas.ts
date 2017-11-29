@@ -1,5 +1,5 @@
 import { Handle } from './handle'
-import { Config, CONFIG } from '../config'
+import { Config, CONFIG } from './config'
 
 export class Canvas {
     readonly canvas: HTMLCanvasElement

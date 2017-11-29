@@ -1,4 +1,5 @@
 import { Observable } from "rxjs/Observable"
+import 'rxjs/add/operator/filter'
 
 export type KeyEvent = {
     key: string

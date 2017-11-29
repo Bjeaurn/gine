@@ -1,4 +1,6 @@
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/observable/merge';
 export declare type MousePosition = {
     x: number;
     y: number;

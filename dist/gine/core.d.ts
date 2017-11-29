@@ -1,8 +1,12 @@
-import { Handle } from './gine/handle';
+import { Handle } from './handle';
+import { Canvas } from './canvas';
 import { Config } from './config';
-import { Observable } from 'rxjs';
-import { Canvas } from "./gine/canvas";
-export declare class Main {
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/share';
+export declare class Core {
     readonly config: Config;
     readonly canvas: Canvas;
     readonly handle: Handle;

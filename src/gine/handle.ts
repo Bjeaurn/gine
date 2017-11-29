@@ -1,6 +1,6 @@
 import { Asset, ImageAsset, SpriteAsset } from './image'
 import {Font} from './text';
-import { CONFIG } from '../config'
+import { CONFIG } from './config'
 
 export class Handle { 
     constructor(readonly handle: CanvasRenderingContext2D) {}
