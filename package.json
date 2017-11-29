@@ -6,8 +6,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "node build/dev-server.js",
-    "prepublish": "webpack --debug --config build/webpack.base.conf.js",
-    "build": "rimraf dist && webpack --debug --progress --config build/webpack.base.conf.js",
+    "build": "rimraf dist && tsc",
     "test": "karma start build/karma.conf.js --single-run"
   },
   "dependencies": {
