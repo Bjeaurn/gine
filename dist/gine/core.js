@@ -11,6 +11,9 @@ define(["require", "exports", "./text", "./handle", "./canvas", "./config", "rxj
             this.tickNr = 0;
             this.then = performance.now();
             this.second = performance.now();
+            if (this.config.canvas === null) {
+                throw new Error("No canvas given!");
+            }
             this.canvas = new canvas_1.Canvas(this.config.canvas);
             this.handle = new handle_1.Handle(this.canvas.canvasElm);
             this.fpsMs = 1000 / this.config.maxFps;
