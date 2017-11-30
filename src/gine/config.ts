@@ -15,5 +15,5 @@ export const CONFIG: Config = {
     height: 600,
     usesTiles: true,
     tileSize: 16,
-    canvas: new HTMLCanvasElement()
+    canvas: null
 }
