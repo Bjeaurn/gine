@@ -1,8 +1,8 @@
-define(["require", "exports", "./text", "./canvas", "./config", "rxjs/Observable", "rxjs/add/operator/map", "rxjs/add/observable/merge", "rxjs/add/observable/interval", "rxjs/add/operator/share"], function (require, exports, text_1, canvas_1, config_1, Observable_1) {
+define(["require", "exports", "./text", "./handle", "./canvas", "./config", "rxjs/Observable", "rxjs/add/operator/map", "rxjs/add/observable/merge", "rxjs/add/observable/interval", "rxjs/add/operator/share"], function (require, exports, text_1, handle_1, canvas_1, config_1, Observable_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var Core = (function () {
-        function Core(config) {
+    var Gine = (function () {
+        function Gine(config) {
             this.config = config;
             this.fps = 0;
             this.frameCount = 0;
@@ -11,26 +11,26 @@ define(["require", "exports", "./text", "./canvas", "./config", "rxjs/Observable
             this.tickNr = 0;
             this.then = performance.now();
             this.second = performance.now();
-            this.canvas = new canvas_1.Canvas(document.getElementById(this.config.canvasId));
-            this.handle = this.canvas.handle;
+            this.canvas = new canvas_1.Canvas(this.config.canvas);
+            this.handle = new handle_1.Handle(this.canvas.canvasElm);
             this.fpsMs = 1000 / this.config.maxFps;
             this.tickMs = 1000 / this.config.tickRate;
-            this.canvas.handle.setFont(new text_1.Font('Helvetica', 16));
-            this.canvas.handle.setColor(0, 0, 0, 0.8);
+            this.handle.setFont(new text_1.Font('Helvetica', 16));
+            this.handle.setColor(0, 0, 0, 0.8);
             var ticks = Observable_1.Observable.interval(this.tickMs).map(function () { return 'tick'; });
             var frames = Observable_1.Observable.interval(this.fpsMs).map(function () { return 'frame'; });
             var seconds = Observable_1.Observable.interval(1000).map(function () { return 'second'; });
             this.update$ = Observable_1.Observable.merge(ticks, frames, seconds)
                 .share();
         }
-        Core.prototype.start = function () {
+        Gine.prototype.start = function () {
             var _this = this;
             this.updateSubscription = this.update$.subscribe(function (t) { return _this.fn(t); });
         };
-        Core.prototype.stop = function () {
+        Gine.prototype.stop = function () {
             this.updateSubscription.unsubscribe();
         };
-        Core.prototype.fn = function (type) {
+        Gine.prototype.fn = function (type) {
             if (type === 'frame')
                 this.frame();
             if (type === 'tick')
@@ -42,7 +42,7 @@ define(["require", "exports", "./text", "./canvas", "./config", "rxjs/Observable
                 this.tickNr = 0;
             }
         };
-        Core.prototype.frame = function () {
+        Gine.prototype.frame = function () {
             this.handle.clear();
             this.handle.setColor(0, 0, 0);
             this.handle.handle.fillRect(1, 1, config_1.CONFIG.width - 2, config_1.CONFIG.height - 2);
@@ -53,13 +53,13 @@ define(["require", "exports", "./text", "./canvas", "./config", "rxjs/Observable
             this.frameCount++;
             window.requestAnimationFrame(function () { });
         };
-        Core.prototype.tick = function () {
+        Gine.prototype.tick = function () {
             this.tickNr++;
             this.delta = (performance.now() - this.then) / 1000;
             this.then = performance.now();
         };
-        return Core;
+        return Gine;
     }());
-    exports.Core = Core;
+    exports.Gine = Gine;
 });
 //# sourceMappingURL=core.js.map

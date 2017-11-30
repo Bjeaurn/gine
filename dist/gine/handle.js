@@ -2,8 +2,9 @@ define(["require", "exports", "./config"], function (require, exports, config_1)
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Handle = (function () {
-        function Handle(handle) {
-            this.handle = handle;
+        function Handle(canvas) {
+            this.canvas = canvas;
+            this.handle = this.canvas.getContext("2d");
         }
         Handle.prototype.clear = function () {
             this.handle.clearRect(0, 0, config_1.CONFIG.width, config_1.CONFIG.height);

@@ -1,5 +1,4 @@
 import { CONFIG } from './config'
-import { Handle } from './handle';
 
 export class Camera {
     private x: number = 0

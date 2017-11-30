@@ -8,7 +8,7 @@ define(["require", "exports"], function (require, exports) {
         height: 600,
         usesTiles: true,
         tileSize: 16,
-        canvasId: 'game'
+        canvas: new HTMLCanvasElement()
     };
 });
 //# sourceMappingURL=config.js.map

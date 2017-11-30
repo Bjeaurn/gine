@@ -1,9 +1,13 @@
+import {Canvas} from './canvas';
 import { Asset, ImageAsset, SpriteAsset } from './image'
 import {Font} from './text';
 import { CONFIG } from './config'
 
 export class Handle { 
-    constructor(readonly handle: CanvasRenderingContext2D) {}
+    readonly handle: CanvasRenderingContext2D
+    constructor(private canvas: HTMLCanvasElement) {
+        this.handle = <CanvasRenderingContext2D>this.canvas.getContext("2d")
+    }
 
     clear() {
         this.handle.clearRect(0, 0, CONFIG.width, CONFIG.height)

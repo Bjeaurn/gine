@@ -1,1 +1,1 @@
-{"version":3,"file":"camera.js","sourceRoot":"","sources":["../../src/gine/camera.ts"],"names":[],"mappings":";;;IAGA;QAII;YAHQ,MAAC,GAAW,CAAC,CAAA;YACb,MAAC,GAAW,CAAC,CAAA;QAGrB,CAAC;QAED,qBAAI,GAAJ;QACA,CAAC;QAED,uBAAM,GAAN;QACA,CAAC;QACL,aAAC;IAAD,CAAC,AAZD,IAYC;IAZY,wBAAM"}
+{"version":3,"file":"camera.js","sourceRoot":"","sources":["../../src/gine/camera.ts"],"names":[],"mappings":";;;IAEA;QAII;YAHQ,MAAC,GAAW,CAAC,CAAA;YACb,MAAC,GAAW,CAAC,CAAA;QAGrB,CAAC;QAED,qBAAI,GAAJ;QACA,CAAC;QAED,uBAAM,GAAN;QACA,CAAC;QACL,aAAC;IAAD,CAAC,AAZD,IAYC;IAZY,wBAAM"}

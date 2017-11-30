@@ -1,9 +1,7 @@
-import { Handle } from './handle'
 import { Config, CONFIG } from './config'
 
 export class Canvas {
-    readonly canvas: HTMLCanvasElement
-    readonly _handle: Handle
+    readonly canvasElm: HTMLCanvasElement
 
     readonly width: number
     readonly height: number
@@ -15,15 +13,15 @@ export class Canvas {
         window.addEventListener('resize', (listener) => {
             this.resize()
         })
-        this.canvas = canvas
+        this.canvasElm = canvas
 
-        this.canvas.oncontextmenu = function (){
+        this.canvasElm.oncontextmenu = function (){
             return false
         }
-        this.canvas.onselectstart = () => false
-        this.canvas.onmousedown = () => false
-        this.canvas.width = CONFIG.width
-        this.canvas.height = CONFIG.height
+        this.canvasElm.onselectstart = () => false
+        this.canvasElm.onmousedown = () => false
+        this.canvasElm.width = CONFIG.width
+        this.canvasElm.height = CONFIG.height
 
         this.width = CONFIG.width
         this.height = CONFIG.height
@@ -33,17 +31,7 @@ export class Canvas {
             this.tilesY = Math.round(this.height / CONFIG.tileSize)
         }
 
-        this._handle = new Handle(<CanvasRenderingContext2D>this.canvas.getContext("2d"))
-        
         this.resize()
-    }
-
-    get handle() {
-        return this._handle
-    }
-
-    clear() {
-        this.handle.clear()
     }
 
     resize() {
@@ -51,8 +39,9 @@ export class Canvas {
         const height = window.innerHeight
 
         this.scale = Math.min(width / CONFIG.width, height / CONFIG.height)
-        this.canvas.width = width
-        this.canvas.height = height
-        this.handle.scale(this.scale)
+        this.canvasElm.width = width
+        this.canvasElm.height = height
+        // TODO Fixme.
+        // this.handle.scale(this.scale)
     }
 }

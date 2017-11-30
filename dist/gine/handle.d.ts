@@ -1,8 +1,9 @@
 import { Asset } from './image';
 import { Font } from './text';
 export declare class Handle {
+    private canvas;
     readonly handle: CanvasRenderingContext2D;
-    constructor(handle: CanvasRenderingContext2D);
+    constructor(canvas: HTMLCanvasElement);
     clear(): void;
     text(value: string | number, x: number, y: number): void;
     setFont(font: Font): void;

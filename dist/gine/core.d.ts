@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/share';
-export declare class Core {
+export declare class Gine {
     readonly config: Config;
     readonly canvas: Canvas;
     readonly handle: Handle;

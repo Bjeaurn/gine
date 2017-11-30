@@ -9,7 +9,7 @@ import 'rxjs/add/observable/merge'
 import 'rxjs/add/observable/interval'
 import 'rxjs/add/operator/share'
 
-export class Core {
+export class Gine {
 
     readonly canvas: Canvas
     readonly handle: Handle
@@ -28,13 +28,13 @@ export class Core {
     readonly clock$: Observable<number>
 
     constructor(readonly config: Config) {
-        this.canvas = new Canvas(<HTMLCanvasElement>document.getElementById(this.config.canvasId))
-        this.handle = this.canvas.handle
+        this.canvas = new Canvas(this.config.canvas)
+        this.handle = new Handle(this.canvas.canvasElm)
         this.fpsMs = 1000 / this.config.maxFps
         this.tickMs = 1000 / this.config.tickRate
 
-        this.canvas.handle.setFont(new Font('Helvetica', 16))
-        this.canvas.handle.setColor(0,0,0,0.8)
+        this.handle.setFont(new Font('Helvetica', 16))
+        this.handle.setColor(0,0,0,0.8)
 
         const ticks = Observable.interval(this.tickMs).map(() => 'tick')
         const frames = Observable.interval(this.fpsMs).map(() => 'frame')

@@ -5,6 +5,6 @@ export declare type Config = {
     height: number;
     usesTiles: boolean;
     tileSize: number;
-    canvasId: string;
+    canvas: HTMLCanvasElement;
 };
 export declare const CONFIG: Config;

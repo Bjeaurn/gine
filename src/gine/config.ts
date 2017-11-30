@@ -5,7 +5,7 @@ export type Config = {
     height: number
     usesTiles: boolean
     tileSize: number
-    canvasId: string
+    canvas: HTMLCanvasElement
 }
 
 export const CONFIG: Config = {
@@ -15,5 +15,5 @@ export const CONFIG: Config = {
     height: 600,
     usesTiles: true,
     tileSize: 16,
-    canvasId: 'game'
+    canvas: new HTMLCanvasElement()
 }
