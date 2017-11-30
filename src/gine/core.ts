@@ -28,6 +28,9 @@ export class Gine {
     readonly clock$: Observable<number>
 
     constructor(readonly config: Config) {
+        if(this.config.canvas === null) {
+            throw new Error("No canvas given!");
+        }
         this.canvas = new Canvas(this.config.canvas)
         this.handle = new Handle(this.canvas.canvasElm)
         this.fpsMs = 1000 / this.config.maxFps
