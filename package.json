@@ -1,9 +1,12 @@
 {
   "name": "gine",
   "version": "2.0.0",
-  "description": "Gine engine vol. 2",
+  "description": "Gine game engine.",
   "main": "dist/index.js",
-  "types": "./dist/index.d.ts",  
+  "types": "./dist/index.d.ts",
+  "keywords": [
+    "game", "gamedev", "typescript", "engine"
+  ],
   "scripts": {
     "start": "npm run dev",
     "dev": "node build/dev-server.js",
@@ -15,28 +18,9 @@
     "rxjs": "^5.4.3"
   },
   "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-runtime": "^6.0.0",
-    "babel-preset-es2015": "^6.0.0",
-    "babel-preset-stage-2": "^6.0.0",
-    "babel-runtime": "^5.8.0",
-    "connect-history-api-fallback": "^1.1.0",
-    "copy-webpack-plugin": "^4.2.1",
-    "css-loader": "^0.23.0",
     "eslint": "^1.10.3",
     "eslint-friendly-formatter": "^1.2.2",
-    "eslint-loader": "^1.2.0",
-    "eventsource-polyfill": "^0.9.6",
-    "express": "^4.13.3",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "file-loader": "^0.8.4",
-    "function-bind": "^1.0.2",
-    "html-loader": "^0.4.0",
-    "html-webpack-plugin": "^2.8.1",
-    "inject-loader": "^2.0.1",
     "jasmine-core": "^2.4.1",
-    "json-loader": "^0.5.4",
     "karma": "^0.13.15",
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^1.0.0",
@@ -44,15 +28,8 @@
     "karma-webpack": "^2.0.4",
     "phantomjs-prebuilt": "^2.1.3",
     "rimraf": "^2.5.0",
-    "style-loader": "^0.13.0",
-    "ts-loader": "^0.8.0",
     "tslint": "^5.7.0",
-    "tslint-loader": "^3.5.3",
-    "typescript": "^2.5.3",
-    "url-loader": "^0.5.7",
-    "webpack": "^3.8.1",
-    "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.6.0"
+    "typescript": "^2.5.3"
   },
   "author": "Bjorn 'Bjeaurn'",
   "license": "ISC"
