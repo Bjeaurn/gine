@@ -1,11 +1,14 @@
 {
   "name": "gine",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Gine game engine.",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
   "keywords": [
-    "game", "gamedev", "typescript", "engine"
+    "game",
+    "gamedev",
+    "typescript",
+    "engine"
   ],
   "scripts": {
     "start": "npm run dev",
