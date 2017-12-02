@@ -11,8 +11,8 @@ import 'rxjs/add/operator/share'
 
 export class Gine {
 
-    readonly canvas: Canvas
-    readonly handle: Handle
+    static readonly canvas: Canvas
+    static readonly handle: Handle
     public fps: number = 0
     private frameCount: number = 0
     private delta: number = 0
