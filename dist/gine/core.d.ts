@@ -8,8 +8,8 @@ import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/share';
 export declare class Gine {
     readonly config: Config;
-    readonly canvas: Canvas;
-    readonly handle: Handle;
+    static canvas: Canvas;
+    static handle: Handle;
     fps: number;
     private frameCount;
     private delta;

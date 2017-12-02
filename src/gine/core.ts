@@ -11,8 +11,8 @@ import 'rxjs/add/operator/share'
 
 export class Gine {
 
-    static readonly canvas: Canvas
-    static readonly handle: Handle
+    static canvas: Canvas
+    static handle: Handle
     public fps: number = 0
     private frameCount: number = 0
     private delta: number = 0
@@ -31,13 +31,13 @@ export class Gine {
         if(this.config.canvas === null) {
             throw new Error("No canvas given!");
         }
-        this.canvas = new Canvas(this.config.canvas)
-        this.handle = new Handle(this.canvas.canvasElm)
+        Gine.canvas = new Canvas(this.config.canvas)
+        Gine.handle = new Handle(Gine.canvas.canvasElm)
         this.fpsMs = 1000 / this.config.maxFps
         this.tickMs = 1000 / this.config.tickRate
 
-        this.handle.setFont(new Font('Helvetica', 16))
-        this.handle.setColor(0,0,0,0.8)
+        Gine.handle.setFont(new Font('Helvetica', 16))
+        Gine.handle.setColor(0,0,0,0.8)
 
         const ticks = Observable.interval(this.tickMs).map(() => 'tick')
         const frames = Observable.interval(this.fpsMs).map(() => 'frame')
@@ -69,13 +69,13 @@ export class Gine {
     }
 
     frame(): void {
-        this.handle.clear()
-        this.handle.setColor(0,0,0)
-        this.handle.handle.fillRect(1, 1, CONFIG.width-2, CONFIG.height-2)
-        this.handle.setFont(new Font('Helvetica', 10))
-        this.handle.setColor(0, 255, 0)
-        this.handle.text(""+this.fps+'fps', 5, 16)
-        this.handle.text(""+this.tickrate+' tickrate', 5, 40)
+        Gine.handle.clear()
+        Gine.handle.setColor(0,0,0)
+        Gine.handle.handle.fillRect(1, 1, CONFIG.width-2, CONFIG.height-2)
+        Gine.handle.setFont(new Font('Helvetica', 10))
+        Gine.handle.setColor(0, 255, 0)
+        Gine.handle.text(""+this.fps+'fps', 5, 16)
+        Gine.handle.text(""+this.tickrate+' tickrate', 5, 40)
         this.frameCount++
         window.requestAnimationFrame( () => {} )
     }
