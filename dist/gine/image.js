@@ -12,25 +12,23 @@ define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var assetFolder = 'assets';
-    var Asset = (function (_super) {
-        __extends(Asset, _super);
+    var Asset = (function () {
         function Asset(name, src) {
-            var _this = _super.call(this) || this;
-            _this.type = 'Asset';
-            _this.imageLoaded = false;
-            _this.image = new Image();
-            _this.image.src = assetFolder + '/' + src;
-            _this.image.onload = function () {
+            var _this = this;
+            this.type = 'Asset';
+            this.imageLoaded = false;
+            this.image = new Image();
+            this.image.src = assetFolder + '/' + src;
+            this.image.onload = function () {
                 _this.imageLoaded = true;
                 _this.width = _this.image.width;
                 _this.height = _this.image.height;
             };
-            return _this;
         }
         Asset.prototype.draw = function () { };
         Asset.prototype.update = function () { };
         return Asset;
-    }(HTMLImageElement));
+    }());
     exports.Asset = Asset;
     var ImageAsset = (function (_super) {
         __extends(ImageAsset, _super);

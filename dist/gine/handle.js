@@ -21,7 +21,7 @@ define(["require", "exports", "./config"], function (require, exports, config_1)
             this.handle.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha + ')';
         };
         Handle.prototype.draw = function (image, x, y) {
-            this.handle.drawImage(image, x, y);
+            this.handle.drawImage(image.image, x, y);
         };
         Handle.prototype.rotateImage = function (image, degrees) {
             if (!degrees)

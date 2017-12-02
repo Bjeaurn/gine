@@ -3,10 +3,11 @@ export interface IGineAsset {
     type: string;
     width: number;
     height: number;
+    image: HTMLImageElement | null;
     draw(): void;
     update(): void;
 }
-export declare class Asset extends HTMLImageElement implements IGineAsset {
+export declare class Asset implements IGineAsset {
     type: string;
     width: number;
     height: number;

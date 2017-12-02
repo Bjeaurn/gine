@@ -27,7 +27,7 @@ export class Handle {
     }
 
     draw(image: Asset, x: number, y: number) {
-        this.handle.drawImage(image, x, y)
+        this.handle.drawImage(image.image, x, y)
     }
 
     rotateImage(image: Asset, degrees?: number) {

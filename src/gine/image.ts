@@ -5,13 +5,14 @@ export interface IGineAsset {
     type: string
     width: number
     height: number
+    image: HTMLImageElement | null
 
     draw(): void
     update(): void
 }
 const assetFolder = 'assets'
 
-export class Asset extends HTMLImageElement implements IGineAsset {
+export class Asset implements IGineAsset {
     type: string = 'Asset'
     width: number
     height: number
@@ -19,7 +20,6 @@ export class Asset extends HTMLImageElement implements IGineAsset {
     imageLoaded: boolean = false
     
     constructor(name: string, src: string) {
-        super()
         this.image = new Image()
         this.image.src = assetFolder+'/'+src
 
