@@ -1,11 +1,5 @@
-export type Config = {
-    maxFps: number
-    tickRate: number
-    width: number
-    height: number
-    usesTiles: boolean
-    tileSize: number
-    canvas: HTMLCanvasElement | null
+export class Config {
+    constructor(readonly width: number, readonly height: number, canvas: HTMLCanvasElement, readonly tickRate: number = 105,readonly  maxFps: number = 60, usesTiles: boolean = true, tileSize: number = 16) {}
 }
 
 export const CONFIG: Config = {
