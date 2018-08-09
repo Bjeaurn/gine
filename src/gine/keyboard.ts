@@ -1,5 +1,5 @@
 import { Observable, fromEvent, merge } from "rxjs";
-import { map, filter } from "../../node_modules/rxjs/operators";
+import { map, filter } from "rxjs/operators";
 
 export type KeyEvent = {
   key: string;

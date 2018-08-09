@@ -1,11 +1,11 @@
-import { Observable, fromEvent, merge } from "../../node_modules/rxjs";
-import { map } from "../../node_modules/rxjs/operators";
+import { Observable, fromEvent, merge } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export type MousePosition = {
   x: number;
   y: number;
   button: number;
-  type: "mouseup" | "mousedown";
+  type: 'mouseup' | 'mousedown';
   time?: number;
 };
 
@@ -14,10 +14,10 @@ export class Mouse {
   private lastPosition: MousePosition;
 
   constructor(readonly canvas: HTMLCanvasElement) {
-    const mousedown = fromEvent(this.canvas, "mousedown");
-    const mouseup = fromEvent(this.canvas, "mouseup");
-    // mousemove ?
-    this.mouse$ = merge(mousedown, mouseup).pipe(
+    const mousedown = fromEvent(this.canvas, 'mousedown');
+    const mouseup = fromEvent(this.canvas, 'mouseup');
+    const mousemove = fromEvent(this.canvas, 'mousemove');
+    this.mouse$ = merge(mousedown, mouseup, mousemove).pipe(
       map((ev: MouseEvent) => {
         this.lastPosition = this.getMousePosition(ev);
         return this.lastPosition;
