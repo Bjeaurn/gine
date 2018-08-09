@@ -10,8 +10,6 @@ export interface IGineAsset {
     draw(): void
     update(): void
 }
-const assetFolder = 'assets'
-
 export class Asset implements IGineAsset {
     type: string = 'Asset'
     width: number
@@ -21,7 +19,7 @@ export class Asset implements IGineAsset {
     
     constructor(name: string, src: string) {
         this.image = new Image()
-        this.image.src = assetFolder+'/'+src
+        this.image.src = src
 
         this.image.onload = () => {
             this.imageLoaded = true
@@ -37,7 +35,7 @@ export class Asset implements IGineAsset {
 export class ImageAsset extends Asset {
     type: string = 'Image'
 
-    constructor(name: string, src: string, options: ImageOptions) {
+    constructor(name: string, src: string, options?: ImageOptions) {
         super(name, src)
     }
 
@@ -54,11 +52,11 @@ export class SpriteAsset extends Asset {
     ticksPerFrame: number = 0
     frameIndex: number = 0
 
-    constructor(name: string, src: string, options: SpriteOptions) {
+    constructor(name: string, src: string, options?: SpriteOptions) {
         super(name, src)
-        this.numberOfFrames = options.numberOfFrames || 1
-        this.ticksPerFrame = options.ticksPerFrame || 0
-        this.frameIndex = options.frameIndex || 0
+        this.numberOfFrames = (options && options.numberOfFrames) ? options.numberOfFrames : 1;
+        this.ticksPerFrame = (options && options.ticksPerFrame) ? options.ticksPerFrame : 0;
+        this.frameIndex = (options && options.frameIndex) ? options.frameIndex : 0;
     }
 
     draw() {

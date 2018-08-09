@@ -9,3 +9,5 @@ export * from './gine/keyboard'
 export * from './gine/mouse'
 export * from './gine/text'
 export * from './gine/tile'
+export * from './gine/scene';
+export * from './gine/store';

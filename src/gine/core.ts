@@ -4,12 +4,16 @@ import { Canvas } from "./canvas";
 import { CONFIG, Config } from "./config";
 import { map, share } from "rxjs/operators";
 import { Observable, Subscription, interval, merge } from "rxjs";
+import { Scene } from "./scene";
+import { Store } from "./store";
 
 export type TickTypes = "tick" | "frame" | "second";
 
 export class Gine {
   static canvas: Canvas;
   static handle: Handle;
+  static store: Store;
+
   public fps: number = 0;
   private frameCount: number = 0;
   private delta: number = 0;
@@ -19,7 +23,7 @@ export class Gine {
   private second: number = performance.now();
   readonly fpsMs: number;
   readonly tickMs: number;
-
+  private scene: Scene | null;
   readonly update$: Observable<TickTypes>;
   private updateSubscription: Subscription;
   readonly clock$: Observable<number>;
@@ -30,6 +34,8 @@ export class Gine {
     }
     Gine.canvas = new Canvas(this.config.canvas);
     Gine.handle = new Handle(Gine.canvas.canvasElm);
+    Gine.store = new Store();
+    
     this.fpsMs = 1000 / this.config.maxFps;
     this.tickMs = 1000 / this.config.tickRate;
 
@@ -41,6 +47,10 @@ export class Gine {
     const seconds = interval(1000).pipe(map(() => "second"));
 
     this.update$ = merge<TickTypes>(ticks, frames, seconds).pipe(share());
+  }
+
+  changeScene(scene: Scene) {
+    this.scene = scene;
   }
 
   start() {
@@ -64,6 +74,9 @@ export class Gine {
     this.tickrate = this.tickNr;
     this.frameCount = 0;
     this.tickNr = 0;
+    if(this.scene !== null && this.scene.second) {
+      this.scene.second();
+    }
   }
 
   frame(): void {
@@ -74,6 +87,11 @@ export class Gine {
     Gine.handle.setColor(0, 255, 0);
     Gine.handle.text("" + this.fps + "fps", 5, 16);
     Gine.handle.text("" + this.tickrate + " tickrate", 5, 40);
+
+    if (this.scene !== null) {
+      this.scene.frame();
+    }
+
     this.frameCount++;
     window.requestAnimationFrame(() => {});
   }
@@ -82,5 +100,9 @@ export class Gine {
     this.tickNr++;
     this.delta = (performance.now() - this.then) / 1000;
     this.then = performance.now();
+
+    if (this.scene !== null) {
+      this.scene.tick();
+    }
   }
 }
