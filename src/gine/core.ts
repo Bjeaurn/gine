@@ -5,6 +5,8 @@ import { CONFIG, Config } from "./config";
 import { map, share } from "rxjs/operators";
 import { Observable, Subscription, interval, merge } from "rxjs";
 
+export type TickTypes = "tick" | "frame" | "second";
+
 export class Gine {
   static canvas: Canvas;
   static handle: Handle;
@@ -18,7 +20,7 @@ export class Gine {
   readonly fpsMs: number;
   readonly tickMs: number;
 
-  readonly update$: Observable<string>;
+  readonly update$: Observable<TickTypes>;
   private updateSubscription: Subscription;
   readonly clock$: Observable<number>;
 
@@ -38,7 +40,7 @@ export class Gine {
     const frames = interval(this.fpsMs).pipe(map(() => "frame"));
     const seconds = interval(1000).pipe(map(() => "second"));
 
-    this.update$ = merge(ticks, frames, seconds).pipe(share());
+    this.update$ = merge<TickTypes>(ticks, frames, seconds).pipe(share());
   }
 
   start() {
@@ -49,15 +51,19 @@ export class Gine {
     this.updateSubscription.unsubscribe();
   }
 
-  fn(type: string): void {
+  private fn(type: TickTypes): void {
     if (type === "frame") this.frame();
     if (type === "tick") this.tick();
     if (type === "second") {
-      this.fps = this.frameCount;
-      this.tickrate = this.tickNr;
-      this.frameCount = 0;
-      this.tickNr = 0;
+      this.updateRateData();
     }
+  }
+
+  private updateRateData() {
+    this.fps = this.frameCount;
+    this.tickrate = this.tickNr;
+    this.frameCount = 0;
+    this.tickNr = 0;
   }
 
   frame(): void {
