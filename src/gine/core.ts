@@ -3,7 +3,7 @@ import { map, share } from 'rxjs/operators'
 import { Canvas } from './canvas'
 import { CONFIG, Config } from './config'
 import { Handle } from './handle'
-import { Scene } from './scene'
+import { IScene } from './scene'
 import { Store } from './store'
 import { Font } from './text'
 
@@ -25,7 +25,7 @@ export class Gine {
   private tickNr: number = 0
   private then: number = performance.now()
   private second: number = performance.now()
-  private scene: Scene | null
+  private scene: IScene | null
   private updateSubscription: Subscription
 
   constructor(readonly config: Config) {
@@ -62,12 +62,12 @@ export class Gine {
   // Thought: Might want to have some more stuff as statics, like Text and Keyboard/Mouse
   // under the Gine core.
 
-  public changeScene(scene: Scene) {
+  public changeScene(scene: IScene) {
     this.scene = scene
   }
 
   public start() {
-    this.updateSubscription = this.update$.subscribe((t) => this.fn(t))
+    this.updateSubscription = this.update$.subscribe(t => this.fn(t))
   }
 
   public stop() {
@@ -101,8 +101,12 @@ export class Gine {
   }
 
   private fn(type: TickTypes): void {
-    if (type === 'frame') { this.frame() }
-    if (type === 'tick') { this.tick() }
+    if (type === 'frame') {
+      this.frame()
+    }
+    if (type === 'tick') {
+      this.tick()
+    }
     if (type === 'second') {
       this.updateRateData()
     }

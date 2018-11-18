@@ -11,8 +11,9 @@
     "engine"
   ],
   "scripts": {
-    "start": "npm run build",
-    "build": "rm -rf dist/ && tsc && echo 'Build completed, check your dist/ folder!'"
+    "start": "npm run lint && npm run build",
+    "build": "rm -rf dist/ && tsc && echo 'Build completed, check your dist/ folder!'",
+    "lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
     "es6-shim": "^0.35.3",

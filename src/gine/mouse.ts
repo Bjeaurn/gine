@@ -1,7 +1,7 @@
 import { fromEvent, merge, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-export interface MousePosition {
+export interface IMousePosition {
   x: number
   y: number
   button: number
@@ -10,8 +10,8 @@ export interface MousePosition {
 }
 
 export class Mouse {
-  public readonly mouse$: Observable<MousePosition>
-  private lastPosition: MousePosition
+  public readonly mouse$: Observable<IMousePosition>
+  private lastPosition: IMousePosition
 
   constructor(readonly canvas: HTMLCanvasElement) {
     const mousedown = fromEvent(this.canvas, 'mousedown')
@@ -25,16 +25,16 @@ export class Mouse {
     )
   }
 
-  public getPosition(): MousePosition {
+  public getPosition(): IMousePosition {
     return this.lastPosition
   }
 
-  public getMousePosition(ev: MouseEvent): MousePosition {
+  public getMousePosition(ev: MouseEvent): IMousePosition {
     return {
       x: Math.round(ev.clientX),
       y: Math.round(ev.clientY),
       button: ev.button,
       type: ev.type,
-    } as MousePosition
+    } as IMousePosition
   }
 }

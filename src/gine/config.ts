@@ -1,7 +1,7 @@
 export class Config {
   public usesTiles: boolean
   public tileSize: number
-  public readonly viewport: Viewport
+  public readonly viewport: IViewport
   constructor(
     readonly width: number,
     readonly height: number,
@@ -9,7 +9,7 @@ export class Config {
     readonly tickRate: number = 105,
     readonly maxFps: number = 60,
     usesTiles: boolean = true,
-    tileSize: number = 16,
+    tileSize: number = 16
   ) {
     const minTile = this.tileSize * 2
     this.viewport = {} as any
@@ -20,7 +20,7 @@ export class Config {
   }
 }
 
-export interface Viewport {
+export interface IViewport {
   minX: number
   minY: number
   maxX: number
@@ -39,6 +39,6 @@ export const CONFIG = {
     minY: -32,
     minX: -32,
     maxX: 632,
-    maxY: 432,
-  },
+    maxY: 432
+  }
 }

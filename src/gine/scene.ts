@@ -1,4 +1,4 @@
-export interface Scene {
+export interface IScene {
   [key: string]: any
   tick(): void
   frame(): void
@@ -7,7 +7,7 @@ export interface Scene {
   destroy(): string | void
 }
 
-export const SCENE_EMPTY: Scene = {
+export const SCENE_EMPTY: IScene = {
   tick(): void {},
   frame(): void {},
   second(): void {},

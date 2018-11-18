@@ -1,13 +1,13 @@
 import { fromEvent, merge, Observable } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 
-export interface KeyEvent {
+export interface IKeyEvent {
   key: string
   type: 'keyup' | 'keydown'
 }
 
 export class Keyboard {
-  public readonly key$: Observable<KeyEvent>
+  public readonly key$: Observable<IKeyEvent>
 
   private pressed: boolean[] = []
 
@@ -32,7 +32,7 @@ export class Keyboard {
 
     this.key$ = merge(keyup, keydown).pipe(
       map((ev: KeyboardEvent) => {
-        return { key: ev.key, type: ev.type } as KeyEvent
+        return { key: ev.key, type: ev.type } as IKeyEvent
       }),
     )
   }
