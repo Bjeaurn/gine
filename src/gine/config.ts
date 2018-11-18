@@ -1,16 +1,21 @@
 export class Config {
-  public usesTiles: boolean
-  public tileSize: number
+  readonly width: number
+  readonly height: number
+  readonly maxFps: number
+  readonly tickRate: number
+  readonly tileSize: number
+  readonly usesTiles: boolean
   public readonly viewport: IViewport
   constructor(
-    readonly width: number,
-    readonly height: number,
     readonly canvas: HTMLCanvasElement | null,
-    readonly tickRate: number = 105,
-    readonly maxFps: number = 60,
-    usesTiles: boolean = true,
-    tileSize: number = 16
+    readonly args: IConfigArguments
   ) {
+    this.width = this.args.width || 600
+    this.height = this.args.height || 400
+    this.tickRate = this.args.tickRate || 105
+    this.maxFps = this.args.maxFps || 60
+    this.tileSize = this.args.tileSize || 16
+    this.usesTiles = this.args.usesTiles || true
     const minTile = this.tileSize * 2
     this.viewport = {} as any
     this.viewport.minY = 0 - minTile
@@ -20,6 +25,15 @@ export class Config {
   }
 }
 
+export interface IConfigArguments {
+  readonly width?: number
+  readonly height?: number
+  readonly tickRate?: number
+  readonly maxFps?: number
+  usesTiles?: boolean
+  tileSize?: number
+}
+
 export interface IViewport {
   minX: number
   minY: number
@@ -27,18 +41,11 @@ export interface IViewport {
   maxY: number
 }
 
-export const DEFAULT_CONFIG = {
+export const DEFAULT_CONFIG: IConfigArguments = {
   maxFps: 60,
   tickRate: 105,
   width: 800,
   height: 600,
   usesTiles: true,
-  tileSize: 16,
-  canvas: null,
-  viewport: {
-    minY: -32,
-    minX: -32,
-    maxX: 632,
-    maxY: 432
-  }
+  tileSize: 16
 }

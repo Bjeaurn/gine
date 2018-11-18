@@ -1,4 +1,3 @@
-import { Config, DEFAULT_CONFIG } from './config'
 import { Gine } from './core'
 
 export class Canvas {
