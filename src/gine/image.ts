@@ -11,12 +11,12 @@ export interface IGineAsset {
     update(): void
 }
 export class Asset implements IGineAsset {
-    type: string = 'Asset'
-    width: number
-    height: number
-    image: HTMLImageElement
-    imageLoaded: boolean = false
-    
+    public type: string = 'Asset'
+    public width: number
+    public height: number
+    public image: HTMLImageElement
+    public imageLoaded: boolean = false
+
     constructor(name: string, src: string) {
         this.image = new Image()
         this.image.src = src
@@ -28,40 +28,40 @@ export class Asset implements IGineAsset {
         }
     }
 
-    draw() {}
-    update() {}
+    public draw() {}
+    public update() {}
 }
 
 export class ImageAsset extends Asset {
-    type: string = 'Image'
+    public type: string = 'Image'
 
-    constructor(name: string, src: string, options?: ImageOptions) {
+constructor(name: string, src: string, options?: ImageOptions) {
         super(name, src)
     }
 
-    draw() {}
-    update() {}
+    public draw() {}
+    public update() {}
 }
 
 export class SpriteAsset extends Asset {
-    type: string = 'Sprite'
+    public type: string = 'Sprite'
 
-    sizeX: number
-    sizeY: number
-    numberOfFrames: number = 1    
-    ticksPerFrame: number = 0
-    frameIndex: number = 0
+    public sizeX: number
+    public sizeY: number
+    public numberOfFrames: number = 1
+    public ticksPerFrame: number = 0
+    public frameIndex: number = 0
 
     constructor(name: string, src: string, options?: SpriteOptions) {
         super(name, src)
-        this.numberOfFrames = (options && options.numberOfFrames) ? options.numberOfFrames : 1;
-        this.ticksPerFrame = (options && options.ticksPerFrame) ? options.ticksPerFrame : 0;
-        this.frameIndex = (options && options.frameIndex) ? options.frameIndex : 0;
+        this.numberOfFrames = (options && options.numberOfFrames) ? options.numberOfFrames : 1
+        this.ticksPerFrame = (options && options.ticksPerFrame) ? options.ticksPerFrame : 0
+        this.frameIndex = (options && options.frameIndex) ? options.frameIndex : 0
     }
 
-    draw() {
+    public draw() {
     }
-    update() {}
+    public update() {}
 }
 
 export type GineImageOptions = ImageOptions | SpriteOptions
@@ -76,6 +76,6 @@ export class SpriteOptions extends ImageOptions {
         readonly heightPerImage: number,
         readonly numberOfFrames?: number,
         readonly ticksPerFrame?: number,
-        readonly frameIndex?: number
+        readonly frameIndex?: number,
     ) { super() }
 }

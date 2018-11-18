@@ -1,7 +1,7 @@
 export class Tile {
-    readonly x: number
-    readonly y: number
+    public readonly x: number
+    public readonly y: number
 
-    draw() {
+    public draw() {
     }
 }

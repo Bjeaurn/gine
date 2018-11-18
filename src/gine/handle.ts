@@ -1,47 +1,52 @@
-import { Canvas } from "./canvas";
-import { Asset, ImageAsset, SpriteAsset } from "./image";
-import { Font } from "./text";
-import { CONFIG } from "./config";
+import { Canvas } from './canvas'
+import { CONFIG } from './config'
+import { Gine } from './core'
+import { Asset, ImageAsset, SpriteAsset } from './image'
+import { Font } from './text'
 
 export class Handle {
-  readonly handle: CanvasRenderingContext2D;
-  constructor(private canvas: HTMLCanvasElement) {
-    this.handle = <CanvasRenderingContext2D>this.canvas.getContext("2d");
+  public readonly handle: CanvasRenderingContext2D
+  constructor(private canvas: Canvas) {
+    this.handle = this.canvas.canvasElm.getContext('2d') as CanvasRenderingContext2D
+    // console.log(this.canvas.scale)
+    this.handle.scale(this.canvas.scale.x, this.canvas.scale.y)
   }
 
-  clear() {
-    this.handle.clearRect(0, 0, CONFIG.width, CONFIG.height);
+  public clear() {
+    this.handle.clearRect(0, 0, CONFIG.width, CONFIG.height)
   }
 
-  text(value: string | number, x: number, y: number) {
-    this.handle.fillText(<string>value, x, y);
+  public text(value: string | number, x: number, y: number) {
+    this.handle.fillText(value as string, x, y)
   }
 
-  setFont(font: Font) {
-    this.handle.font = font.toString();
+  public setFont(font: Font) {
+    this.handle.font = font.toString()
   }
 
-  setColor(red: number, green: number, blue: number, alpha?: number) {
-    if (!alpha) alpha = 1.0;
+  public setColor(red: number, green: number, blue: number, alpha?: number) {
+    if (!alpha) { alpha = 1.0 }
     this.handle.fillStyle =
-      "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+      'rgba(' + red + ',' + green + ',' + blue + ',' + alpha + ')'
   }
 
-  draw(image: Asset, x: number, y: number) {
-    this.handle.drawImage(image.image, x, y);
+  public draw(image: Asset, x: number, y: number) {
+    if (x < CONFIG.viewport.maxX && x > CONFIG.viewport.minX && y < CONFIG.viewport.maxY && y > CONFIG.viewport.minY) {
+      this.handle.drawImage(image.image, x, y)
+    }
   }
 
-  rotateImage(image: Asset, degrees?: number) {
-    if (!degrees) degrees = 0;
-    const radians = (degrees * Math.PI) / 180;
+  public rotateImage(image: Asset, degrees?: number) {
+    if (!degrees) { degrees = 0 }
+    const radians = (degrees * Math.PI) / 180
     // COME BACK TO THIS LATER, FIGURE OUT THE `BUFFERHANDLE`
   }
 
-  resetColor() {
-    this.setColor(0, 0, 0);
+  public resetColor() {
+    this.setColor(0, 0, 0)
   }
 
-  scale(scale: number) {
-    this.handle.scale(scale, scale);
+  public scale(scale: number) {
+    this.handle.scale(scale, scale)
   }
 }

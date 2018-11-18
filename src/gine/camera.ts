@@ -7,9 +7,9 @@ export class Camera {
     constructor() {
     }
 
-    draw() {
+    public draw() {
     }
 
-    update() {
+    public update() {
     }
 }
