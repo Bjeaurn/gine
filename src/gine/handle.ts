@@ -10,7 +10,6 @@ export class Handle {
     this.handle = this.canvas.canvasElm.getContext(
       '2d'
     ) as CanvasRenderingContext2D
-    // console.log(this.canvas.scale)
     this.handle.scale(this.canvas.scale.x, this.canvas.scale.y)
   }
 
