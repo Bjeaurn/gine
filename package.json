@@ -16,10 +16,10 @@
     "lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
-    "es6-shim": "^0.35.3",
+    "es6-shim": "^0.35.4",
     "node-ts": "^2.1.2",
-    "rxjs": "^6.0.0",
-    "ts-node": "^7.0.0"
+    "rxjs": "^6.3.3",
+    "ts-node": "^7.0.1"
   },
   "devDependencies": {
     "http-server": "^0.11.1",
