@@ -1,7 +1,7 @@
 import { interval, merge, Observable, Subscription } from 'rxjs'
 import { map, share } from 'rxjs/operators'
 import { Canvas } from './canvas'
-import { CONFIG, Config } from './config'
+import { Config, DEFAULT_CONFIG } from './config'
 import { Handle } from './handle'
 import { IScene } from './scene'
 import { Store } from './store'
@@ -10,6 +10,7 @@ import { Font } from './text'
 export type TickTypes = 'tick' | 'frame' | 'second'
 
 export class Gine {
+  public static CONFIG: Config
   public static canvas: Canvas
   public static handle: Handle
   public static store: Store
@@ -32,12 +33,13 @@ export class Gine {
     if (this.config.canvas === null) {
       throw new Error('No canvas given!')
     }
-    Gine.canvas = new Canvas(this.config.canvas)
+    Gine.CONFIG = this.config
+    Gine.canvas = new Canvas(Gine.CONFIG.canvas as HTMLCanvasElement)
     Gine.handle = new Handle(Gine.canvas)
     Gine.store = new Store()
 
-    this.fpsMs = 1000 / this.config.maxFps
-    this.tickMs = 1000 / this.config.tickRate
+    this.fpsMs = 1000 / Gine.CONFIG.maxFps
+    this.tickMs = 1000 / Gine.CONFIG.tickRate
 
     Gine.handle.setFont(new Font('Helvetica', 16))
     Gine.handle.setColor(0, 0, 0, 0.8)
@@ -77,7 +79,12 @@ export class Gine {
   public frame(): void {
     Gine.handle.clear()
     Gine.handle.setColor(0, 0, 0)
-    Gine.handle.handle.fillRect(1, 1, CONFIG.width - 2, CONFIG.height - 2)
+    Gine.handle.handle.fillRect(
+      1,
+      1,
+      Gine.CONFIG.width - 2,
+      Gine.CONFIG.height - 2
+    )
     Gine.handle.setFont(new Font('Helvetica', 10))
     Gine.handle.setColor(0, 255, 0)
     Gine.handle.text('' + this.fps + 'fps', 5, 16)

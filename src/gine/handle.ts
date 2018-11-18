@@ -1,5 +1,5 @@
 import { Canvas } from './canvas'
-import { CONFIG } from './config'
+import { DEFAULT_CONFIG } from './config'
 import { Gine } from './core'
 import { Asset, ImageAsset, SpriteAsset } from './image'
 import { Font } from './text'
@@ -13,7 +13,7 @@ export class Handle {
   }
 
   public clear() {
-    this.handle.clearRect(0, 0, CONFIG.width, CONFIG.height)
+    this.handle.clearRect(0, 0, DEFAULT_CONFIG.width, DEFAULT_CONFIG.height)
   }
 
   public text(value: string | number, x: number, y: number) {
@@ -31,7 +31,7 @@ export class Handle {
   }
 
   public draw(image: Asset, x: number, y: number) {
-    if (x < CONFIG.viewport.maxX && x > CONFIG.viewport.minX && y < CONFIG.viewport.maxY && y > CONFIG.viewport.minY) {
+    if (x < DEFAULT_CONFIG.viewport.maxX && x > DEFAULT_CONFIG.viewport.minX && y < DEFAULT_CONFIG.viewport.maxY && y > DEFAULT_CONFIG.viewport.minY) {
       this.handle.drawImage(image.image, x, y)
     }
   }

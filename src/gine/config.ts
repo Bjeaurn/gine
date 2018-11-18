@@ -27,7 +27,7 @@ export interface IViewport {
   maxY: number
 }
 
-export const CONFIG = {
+export const DEFAULT_CONFIG = {
   maxFps: 60,
   tickRate: 105,
   width: 800,

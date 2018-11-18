@@ -1,4 +1,4 @@
-import { CONFIG } from './config'
+import { DEFAULT_CONFIG } from './config'
 
 export class Camera {
     private x: number = 0

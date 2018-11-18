@@ -1,4 +1,5 @@
-import { Config, CONFIG } from './config'
+import { Config, DEFAULT_CONFIG } from './config'
+import { Gine } from './core';
 
 export class Canvas {
   public readonly canvasElm: HTMLCanvasElement
@@ -19,15 +20,15 @@ export class Canvas {
       return false
     }
     this.canvasElm.onmousedown = () => false
-    this.canvasElm.width = CONFIG.width
-    this.canvasElm.height = CONFIG.height
+    this.canvasElm.width = Gine.CONFIG.width
+    this.canvasElm.height = Gine.CONFIG.height
 
-    this.width = CONFIG.width
-    this.height = CONFIG.height
+    this.width = Gine.CONFIG.width
+    this.height = Gine.CONFIG.height
 
-    if (CONFIG.usesTiles) {
-      this.tilesX = Math.round(this.width / CONFIG.tileSize)
-      this.tilesY = Math.round(this.height / CONFIG.tileSize)
+    if (Gine.CONFIG.usesTiles) {
+      this.tilesX = Math.round(this.width / Gine.CONFIG.tileSize)
+      this.tilesY = Math.round(this.height / Gine.CONFIG.tileSize)
     }
 
     this.resize()
@@ -37,8 +38,8 @@ export class Canvas {
     const width = window.innerWidth
     const height = window.innerHeight
 
-    this.scale.x = width / CONFIG.width
-    this.scale.y = height / CONFIG.height
+    this.scale.x = width / Gine.CONFIG.width
+    this.scale.y = height / Gine.CONFIG.height
     if (this.scale.x > this.scale.y) {
       this.canvasElm.height = height
     } else {
