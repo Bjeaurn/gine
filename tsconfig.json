@@ -10,6 +10,7 @@
         "sourceMap": true,
         "outDir": "./dist",
         "declaration": true,
+        "experimentalDecorators": true,
         "lib": [
             "dom",
             "es5",

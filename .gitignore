@@ -5,3 +5,5 @@ npm-debug.log.*dist/
 
 dist/
 dist/*
+
+decorators-try.ts
