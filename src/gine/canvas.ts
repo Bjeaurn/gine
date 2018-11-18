@@ -1,5 +1,5 @@
 import { Config, DEFAULT_CONFIG } from './config'
-import { Gine } from './core';
+import { Gine } from './core'
 
 export class Canvas {
   public readonly canvasElm: HTMLCanvasElement

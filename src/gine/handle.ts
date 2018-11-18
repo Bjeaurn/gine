@@ -7,7 +7,9 @@ import { Font } from './text'
 export class Handle {
   public readonly handle: CanvasRenderingContext2D
   constructor(private canvas: Canvas) {
-    this.handle = this.canvas.canvasElm.getContext('2d') as CanvasRenderingContext2D
+    this.handle = this.canvas.canvasElm.getContext(
+      '2d'
+    ) as CanvasRenderingContext2D
     // console.log(this.canvas.scale)
     this.handle.scale(this.canvas.scale.x, this.canvas.scale.y)
   }
@@ -25,19 +27,28 @@ export class Handle {
   }
 
   public setColor(red: number, green: number, blue: number, alpha?: number) {
-    if (!alpha) { alpha = 1.0 }
+    if (!alpha) {
+      alpha = 1.0
+    }
     this.handle.fillStyle =
       'rgba(' + red + ',' + green + ',' + blue + ',' + alpha + ')'
   }
 
   public draw(image: Asset, x: number, y: number) {
-    if (x < DEFAULT_CONFIG.viewport.maxX && x > DEFAULT_CONFIG.viewport.minX && y < DEFAULT_CONFIG.viewport.maxY && y > DEFAULT_CONFIG.viewport.minY) {
+    if (
+      x < DEFAULT_CONFIG.viewport.maxX &&
+      x > DEFAULT_CONFIG.viewport.minX &&
+      y < DEFAULT_CONFIG.viewport.maxY &&
+      y > DEFAULT_CONFIG.viewport.minY
+    ) {
       this.handle.drawImage(image.image, x, y)
     }
   }
 
   public rotateImage(image: Asset, degrees?: number) {
-    if (!degrees) { degrees = 0 }
+    if (!degrees) {
+      degrees = 0
+    }
     const radians = (degrees * Math.PI) / 180
     // COME BACK TO THIS LATER, FIGURE OUT THE `BUFFERHANDLE`
   }

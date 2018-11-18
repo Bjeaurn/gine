@@ -11,6 +11,7 @@
     "no-console": false,
     "member-access": false,
     "only-arrow-functions": false,
-    "no-empty-interface": false
+    "no-empty-interface": false,
+    "ordered-imports": false
   }
 }

@@ -1,5 +1,7 @@
 import { fromEvent, merge, Observable } from 'rxjs'
+import { EventTargetLike } from 'rxjs/internal/observable/fromEvent'
 import { filter, map } from 'rxjs/operators'
+import { Gine } from './core'
 
 export interface IKeyEvent {
   key: string
@@ -11,29 +13,34 @@ export class Keyboard {
 
   private pressed: boolean[] = []
 
-  constructor(readonly canvas: HTMLCanvasElement) {
-    // We seem to not be able to use the canvas to bind `keyup` and `keydown` directly.
-    const keydown = fromEvent(document, 'keydown').pipe(
+  constructor() {
+    const keydown = fromEvent<KeyboardEvent>(
+      document as EventTargetLike<KeyboardEvent>,
+      'keydown'
+    ).pipe(
       filter((ev: KeyboardEvent) => {
         return !this.pressed[ev.keyCode]
       }),
       map((ev: KeyboardEvent) => {
         this.pressed[ev.keyCode] = true
         return ev
-      }),
+      })
     )
 
-    const keyup = fromEvent(document, 'keyup').pipe(
+    const keyup = fromEvent<KeyboardEvent>(
+      document as EventTargetLike<KeyboardEvent>,
+      'keyup'
+    ).pipe(
       map((ev: KeyboardEvent) => {
         this.pressed[ev.keyCode] = false
         return ev
-      }),
+      })
     )
 
     this.key$ = merge(keyup, keydown).pipe(
       map((ev: KeyboardEvent) => {
         return { key: ev.key, type: ev.type } as IKeyEvent
-      }),
+      })
     )
   }
 }

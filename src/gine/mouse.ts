@@ -1,5 +1,7 @@
 import { fromEvent, merge, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { Gine } from './core'
+import { EventTargetLike } from 'rxjs/internal/observable/fromEvent'
 
 export interface IMousePosition {
   x: number
@@ -13,15 +15,24 @@ export class Mouse {
   public readonly mouse$: Observable<IMousePosition>
   private lastPosition: IMousePosition
 
-  constructor(readonly canvas: HTMLCanvasElement) {
-    const mousedown = fromEvent(this.canvas, 'mousedown')
-    const mouseup = fromEvent(this.canvas, 'mouseup')
-    const mousemove = fromEvent(this.canvas, 'mousemove')
+  constructor() {
+    const mousedown = fromEvent<MouseEvent>(
+      Gine.CONFIG.canvas as EventTargetLike<MouseEvent>,
+      'mousedown'
+    )
+    const mouseup = fromEvent<MouseEvent>(
+      Gine.CONFIG.canvas as EventTargetLike<MouseEvent>,
+      'mouseup'
+    )
+    const mousemove = fromEvent<MouseEvent>(
+      Gine.CONFIG.canvas as EventTargetLike<MouseEvent>,
+      'mousemove'
+    )
     this.mouse$ = merge(mousedown, mouseup, mousemove).pipe(
       map((ev: MouseEvent) => {
         this.lastPosition = this.getMousePosition(ev)
         return this.lastPosition
-      }),
+      })
     )
   }
 
@@ -34,7 +45,7 @@ export class Mouse {
       x: Math.round(ev.clientX),
       y: Math.round(ev.clientY),
       button: ev.button,
-      type: ev.type,
+      type: ev.type
     } as IMousePosition
   }
 }

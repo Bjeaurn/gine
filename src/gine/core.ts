@@ -24,8 +24,8 @@ export class Gine {
   private delta: number = 0
   private tickrate: number = 0
   private tickNr: number = 0
-  private then: number = performance.now()
-  private second: number = performance.now()
+  private then: number
+  private second: number
   private scene: IScene | null
   private updateSubscription: Subscription
 
@@ -38,15 +38,19 @@ export class Gine {
     Gine.handle = new Handle(Gine.canvas)
     Gine.store = new Store()
 
+    // Would be default values, but compiler does not agree. `performance` not available yet.
+    this.second = performance.now()
+    this.then = this.second
+
     this.fpsMs = 1000 / Gine.CONFIG.maxFps
     this.tickMs = 1000 / Gine.CONFIG.tickRate
 
     Gine.handle.setFont(new Font('Helvetica', 16))
     Gine.handle.setColor(0, 0, 0, 0.8)
 
-    const ticks = interval(this.tickMs).pipe(map(() => 'tick'))
-    const frames = interval(this.fpsMs).pipe(map(() => 'frame'))
-    const seconds = interval(1000).pipe(map(() => 'second'))
+    const ticks = interval(this.tickMs).pipe(map(() => 'tick')) as Observable<TickTypes>
+    const frames = interval(this.fpsMs).pipe(map(() => 'frame')) as Observable<TickTypes>
+    const seconds = interval(1000).pipe(map(() => 'second')) as Observable<TickTypes>
 
     this.update$ = merge<TickTypes>(ticks, frames, seconds).pipe(share())
   }
