@@ -1,4 +1,4 @@
-import { interval, merge, Observable, Subscription } from 'rxjs'
+import { interval, merge, Observable, Subscription, Subject } from 'rxjs'
 import { map, share } from 'rxjs/operators'
 import { Canvas } from './canvas'
 import { Config, DEFAULT_CONFIG } from './config'
@@ -6,6 +6,7 @@ import { Handle } from './handle'
 import { IScene } from './scene'
 import { Store } from './store'
 import { Font } from './text'
+import { Events } from './events'
 
 export type TickTypes = 'tick' | 'frame' | 'second'
 
@@ -14,6 +15,7 @@ export class Gine {
   public static canvas: Canvas
   public static handle: Handle
   public static store: Store
+  public static events: Events
 
   public fps: number = 0
   public readonly fpsMs: number
@@ -37,6 +39,7 @@ export class Gine {
     Gine.canvas = new Canvas(Gine.CONFIG.canvas as HTMLCanvasElement)
     Gine.handle = new Handle(Gine.canvas)
     Gine.store = new Store()
+    Gine.events = new Events()
 
     // Would be default values, but compiler does not agree. `performance` not available yet.
     this.second = performance.now()
@@ -48,9 +51,15 @@ export class Gine {
     Gine.handle.setFont(new Font('Helvetica', 16))
     Gine.handle.setColor(0, 0, 0, 0.8)
 
-    const ticks = interval(this.tickMs).pipe(map(() => 'tick')) as Observable<TickTypes>
-    const frames = interval(this.fpsMs).pipe(map(() => 'frame')) as Observable<TickTypes>
-    const seconds = interval(1000).pipe(map(() => 'second')) as Observable<TickTypes>
+    const ticks = interval(this.tickMs).pipe(map(() => 'tick')) as Observable<
+      TickTypes
+    >
+    const frames = interval(this.fpsMs).pipe(map(() => 'frame')) as Observable<
+      TickTypes
+    >
+    const seconds = interval(1000).pipe(map(() => 'second')) as Observable<
+      TickTypes
+    >
 
     this.update$ = merge<TickTypes>(ticks, frames, seconds).pipe(share())
   }
