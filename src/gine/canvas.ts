@@ -5,16 +5,15 @@ export class Canvas {
 
   public readonly width: number
   public readonly height: number
-  public readonly tilesX: number | undefined
-  public readonly tilesY: number | undefined
-  public scale: { x: number; y: number } = { x: 0, y: 0 }
+  public tilesX: number | undefined
+  public tilesY: number | undefined
+  public scale: number = 0
 
   constructor(canvas: HTMLCanvasElement) {
     window.addEventListener('resize', listener => {
       this.resize()
     })
     this.canvasElm = canvas
-
     this.canvasElm.oncontextmenu = () => {
       return false
     }
@@ -36,15 +35,20 @@ export class Canvas {
   public resize() {
     const width = window.innerWidth
     const height = window.innerHeight
+    this.scale = Math.min(
+      width / Gine.CONFIG.width,
+      height / Gine.CONFIG.height
+    )
 
-    this.scale.x = width / Gine.CONFIG.width
-    this.scale.y = height / Gine.CONFIG.height
-    if (this.scale.x > this.scale.y) {
-      this.canvasElm.height = height
-    } else {
-      this.canvasElm.width = width
-    }
-    this.canvasElm.width = width
     this.canvasElm.height = height
+    this.canvasElm.width = width
+    if (Gine && Gine.handle && Gine.handle.scale) {
+      Gine.handle.scale(this.scale)
+    }
+
+    if (Gine.CONFIG.usesTiles) {
+      this.tilesX = Math.round(this.width / Gine.CONFIG.tileSize)
+      this.tilesY = Math.round(this.height / Gine.CONFIG.tileSize)
+    }
   }
 }

@@ -12,7 +12,7 @@ export class Config {
   ) {
     this.width = this.args.width || 600
     this.height = this.args.height || 400
-    this.tickRate = this.args.tickRate || 105
+    this.tickRate = this.args.tickRate || 120
     this.maxFps = this.args.maxFps || 60
     this.tileSize = this.args.tileSize || 16
     this.usesTiles = this.args.usesTiles || true

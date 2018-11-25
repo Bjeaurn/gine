@@ -10,11 +10,11 @@ export class Handle {
     this.handle = this.canvas.canvasElm.getContext(
       '2d'
     ) as CanvasRenderingContext2D
-    this.handle.scale(this.canvas.scale.x, this.canvas.scale.y)
+    this.scale(this.canvas.scale)
   }
 
   public clear() {
-    this.handle.clearRect(0, 0, Gine.CONFIG.width, Gine.CONFIG.height)
+    this.handle.clearRect(-1, -1, Gine.CONFIG.width + 1, Gine.CONFIG.height + 1)
   }
 
   public text(value: string | number, x: number, y: number) {

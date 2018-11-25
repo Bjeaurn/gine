@@ -16,7 +16,7 @@ export class Scene implements IScene {
   tick() {}
   frame() {}
   destroy() {
-    Gine.events.sendEvent(Scene.DESTROY_CURRENT_SCENE)
+    Gine.sendEvent(Scene.DESTROY_CURRENT_SCENE)
   }
 }
 

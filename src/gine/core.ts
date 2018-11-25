@@ -6,17 +6,20 @@ import { Handle } from './handle'
 import { IScene } from './scene'
 import { Store } from './store'
 import { Font } from './text'
-import { Events } from './events'
+import { asapScheduler } from 'rxjs'
 
 export type TickTypes = 'tick' | 'frame' | 'second'
 
 export class Gine {
-  public static CONFIG: Config
+  public static readonly CONFIG: Config
   public static canvas: Canvas
   public static handle: Handle
   public static store: Store
-  public static events: Events
-
+  public static events: Observable<string>
+  public static eventsSubject: Subject<string> = new Subject<string>()
+  public static sendEvent(event: string) {
+    Gine.eventsSubject.next(event)
+  }
   public fps: number = 0
   public readonly fpsMs: number
   public readonly tickMs: number
@@ -35,11 +38,11 @@ export class Gine {
     if (this.config.canvas === null) {
       throw new Error('No canvas given!')
     }
-    Gine.CONFIG = this.config
+    (Gine.CONFIG as Config) = this.config
+    Gine.events = Gine.eventsSubject.asObservable().pipe(share())
     Gine.canvas = new Canvas(Gine.CONFIG.canvas as HTMLCanvasElement)
     Gine.handle = new Handle(Gine.canvas)
     Gine.store = new Store()
-    Gine.events = new Events()
 
     // Would be default values, but compiler does not agree. `performance` not available yet.
     this.second = performance.now()
@@ -64,12 +67,6 @@ export class Gine {
     this.update$ = merge<TickTypes>(ticks, frames, seconds).pipe(share())
   }
 
-  //      TODO
-  // Add a static function that the scenes can call, so the main game knows
-  // a scene has destroyed itself. Use the return value to call a new scene?
-  // Optionally; if static don't work; every scene has a constructor containing the
-  // game variable, so it can call the function it needs.
-
   // Thought: Scenes are not in the library, so they are in the game implementation:
   // So they might have access to a static Gine var, that we can reuse.
   // Not sure if it works though.
@@ -79,6 +76,9 @@ export class Gine {
 
   public changeScene(scene: IScene) {
     this.scene = scene
+    if (this.scene && this.scene.init) {
+      this.scene.init()
+    }
   }
 
   public start() {
@@ -92,12 +92,6 @@ export class Gine {
   public frame(): void {
     Gine.handle.clear()
     Gine.handle.setColor(0, 0, 0)
-    Gine.handle.handle.fillRect(
-      1,
-      1,
-      Gine.CONFIG.width - 2,
-      Gine.CONFIG.height - 2
-    )
     Gine.handle.setFont(new Font('Helvetica', 10))
     Gine.handle.setColor(0, 255, 0)
     Gine.handle.text('' + this.fps + 'fps', 5, 16)
@@ -108,7 +102,7 @@ export class Gine {
     }
 
     this.frameCount++
-    window.requestAnimationFrame(() => {})
+    // window.requestAnimationFrame(() => {})
   }
 
   public tick(): void {
