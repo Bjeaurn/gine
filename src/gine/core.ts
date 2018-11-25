@@ -38,7 +38,7 @@ export class Gine {
     if (this.config.canvas === null) {
       throw new Error('No canvas given!')
     }
-    ;(Gine.CONFIG as Config) = this.config
+    (Gine.CONFIG as Config) = this.config
     Gine.events = Gine.eventsSubject.asObservable().pipe(share())
     Gine.canvas = new Canvas(Gine.CONFIG.canvas as HTMLCanvasElement)
     Gine.handle = new Handle(Gine.canvas)

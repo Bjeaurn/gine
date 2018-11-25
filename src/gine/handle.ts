@@ -44,6 +44,25 @@ export class Handle {
     }
   }
 
+  public drawSprite(image: SpriteAsset, x: number, y: number, index?: number) {
+    if (index) {
+      image.calculatePerIndex(index)
+    } else {
+      image.draw()
+    }
+    this.handle.drawImage(
+      image.image,
+      image.sourceX,
+      image.sourceY,
+      image.sizeX,
+      image.sizeY,
+      x,
+      y,
+      image.sizeX,
+      image.sizeY
+    )
+  }
+
   public rotateImage(image: Asset, degrees?: number) {
     if (!degrees) {
       degrees = 0
