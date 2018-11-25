@@ -38,7 +38,7 @@ export class Gine {
     if (this.config.canvas === null) {
       throw new Error('No canvas given!')
     }
-    (Gine.CONFIG as Config) = this.config
+    ;(Gine.CONFIG as Config) = this.config
     Gine.events = Gine.eventsSubject.asObservable().pipe(share())
     Gine.canvas = new Canvas(Gine.CONFIG.canvas as HTMLCanvasElement)
     Gine.handle = new Handle(Gine.canvas)
@@ -92,14 +92,14 @@ export class Gine {
   public frame(): void {
     Gine.handle.clear()
     Gine.handle.setColor(0, 0, 0)
+    if (this.scene && this.scene !== null && this.scene.frame) {
+      this.scene.frame()
+    }
+
     Gine.handle.setFont(new Font('Helvetica', 10))
     Gine.handle.setColor(0, 255, 0)
     Gine.handle.text('' + this.fps + 'fps', 5, 16)
     Gine.handle.text('' + this.tickrate + ' tickrate', 5, 40)
-
-    if (this.scene && this.scene !== null && this.scene.frame) {
-      this.scene.frame()
-    }
 
     this.frameCount++
     // window.requestAnimationFrame(() => {})
