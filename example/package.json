@@ -1,0 +1,23 @@
+{
+  "name": "gine-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "parcel src/index.html",
+    "build": "parcel --build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^1.9.7",
+    "parcel-plugin-static-files-copy": "^1.1.0",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "gine": "^3.2.0"
+  }
+}

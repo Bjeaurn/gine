@@ -8,3 +8,8 @@ dist/*
 
 decorators-try.ts
 scratch.ts
+
+example/node_modules/
+example/dist/
+example/.cache/
+.cache/

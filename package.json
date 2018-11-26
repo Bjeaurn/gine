@@ -11,19 +11,26 @@
     "engine"
   ],
   "scripts": {
-    "start": "npm run lint && npm run build",
-    "build": "rm -rf dist/ && tsc && echo 'Build completed, check your dist/ folder!'",
+    "start": "npm run build",
+    "build": "npm run lint && rm -rf dist/ && tsc && echo 'Build completed, check your dist/ folder!'",
     "lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
     "es6-shim": "^0.35.4",
     "rxjs": "^6.3.3"
   },
+  "peerDependencies": {
+    "typescript": "^3.1.6",
+    "rxjs": "^6.3.3"
+  },
   "devDependencies": {
     "http-server": "^0.11.1",
     "tslint": "^5.11.0",
     "ts-node": "^7.0.1",
-    "typescript": "^2.9.2"
+    "parcel": "^1.9.7",
+    "parcel-plugin-typescript": "^1.0.0",
+    "parcel-plugin-static-files-copy": "^1.1.0",
+    "typescript": "^3.1.6"
   },
   "author": "Bjorn 'Bjeaurn'",
   "license": "ISC"
