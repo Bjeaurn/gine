@@ -1,5 +1,5 @@
 import { fromEvent, merge, Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, share, tap } from 'rxjs/operators'
 import { Gine } from './core'
 import { EventTargetLike } from 'rxjs/internal/observable/fromEvent'
 
@@ -13,16 +13,28 @@ export interface IMousePosition {
 
 export class Mouse {
   public readonly mouse$: Observable<IMousePosition>
+  public isMouseDown: boolean = false
   private lastPosition: IMousePosition
+  private lastClickPosition: IMousePosition
 
   constructor() {
     const mousedown = fromEvent<MouseEvent>(
       Gine.CONFIG.canvas as EventTargetLike<MouseEvent>,
       'mousedown'
+    ).pipe(
+      tap(ev => {
+        this.lastClickPosition = this.getMousePosition(ev)
+        this.isMouseDown = true
+      })
     )
+
     const mouseup = fromEvent<MouseEvent>(
       Gine.CONFIG.canvas as EventTargetLike<MouseEvent>,
       'mouseup'
+    ).pipe(
+      tap(() => {
+        this.isMouseDown = false
+      })
     )
     const mousemove = fromEvent<MouseEvent>(
       Gine.CONFIG.canvas as EventTargetLike<MouseEvent>,
@@ -32,8 +44,13 @@ export class Mouse {
       map((ev: MouseEvent) => {
         this.lastPosition = this.getMousePosition(ev)
         return this.lastPosition
-      })
+      }),
+      share()
     )
+  }
+
+  lastClick(): IMousePosition {
+    return this.lastClickPosition
   }
 
   public getPosition(): IMousePosition {
@@ -42,8 +59,8 @@ export class Mouse {
 
   public getMousePosition(ev: MouseEvent): IMousePosition {
     return {
-      x: Math.round(ev.clientX),
-      y: Math.round(ev.clientY),
+      x: Math.round(ev.clientX / Gine.canvas.scale),
+      y: Math.round(ev.clientY / Gine.canvas.scale),
       button: ev.button,
       type: ev.type
     } as IMousePosition

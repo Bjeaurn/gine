@@ -6,7 +6,8 @@ import { Handle } from './handle'
 import { IScene } from './scene'
 import { Store } from './store'
 import { Font } from './text'
-import { asapScheduler } from 'rxjs'
+import { Keyboard } from './keyboard'
+import { Mouse } from './mouse'
 
 export type TickTypes = 'tick' | 'frame' | 'second'
 
@@ -16,6 +17,8 @@ export class Gine {
   public static handle: Handle
   public static store: Store
   public static events: Observable<string>
+  public static keyboard: Keyboard
+  public static mouse: Mouse
   public static eventsSubject: Subject<string> = new Subject<string>()
   public static sendEvent(event: string) {
     Gine.eventsSubject.next(event)
@@ -43,6 +46,14 @@ export class Gine {
     Gine.canvas = new Canvas(Gine.CONFIG.canvas as HTMLCanvasElement)
     Gine.handle = new Handle(Gine.canvas)
     Gine.store = new Store()
+
+    if (Gine.CONFIG.enableKeyboard) {
+      Gine.keyboard = new Keyboard()
+    }
+
+    if (Gine.CONFIG.enableMouse) {
+      Gine.mouse = new Mouse()
+    }
 
     // Would be default values, but compiler does not agree. `performance` not available yet.
     this.second = performance.now()
@@ -110,7 +121,7 @@ export class Gine {
     this.delta = (performance.now() - this.then) / 1000
     this.then = performance.now()
     if (this.scene && this.scene !== null && this.scene.tick) {
-      this.scene.tick()
+      this.scene.tick(this.delta)
     }
   }
 

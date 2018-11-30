@@ -5,6 +5,8 @@ export class Config {
   readonly tickRate: number
   readonly tileSize: number
   readonly usesTiles: boolean
+  readonly enableKeyboard: boolean
+  readonly enableMouse: boolean
   public readonly viewport: IViewport
   constructor(
     readonly canvas: HTMLCanvasElement | null,
@@ -16,6 +18,8 @@ export class Config {
     this.maxFps = this.args.maxFps || 60
     this.tileSize = this.args.tileSize || 16
     this.usesTiles = this.args.usesTiles || true
+    this.enableKeyboard = this.args.enableKeyboard || true
+    this.enableMouse = this.args.enableMouse || true
     const minTile = this.tileSize * 2
     this.viewport = {} as any
     this.viewport.minY = 0 - minTile
@@ -30,6 +34,8 @@ export interface IConfigArguments {
   readonly height?: number
   readonly tickRate?: number
   readonly maxFps?: number
+  enableKeyboard?: boolean
+  enableMouse?: boolean
   usesTiles?: boolean
   tileSize?: number
 }
@@ -47,5 +53,7 @@ export const DEFAULT_CONFIG: IConfigArguments = {
   width: 800,
   height: 600,
   usesTiles: true,
-  tileSize: 16
+  tileSize: 16,
+  enableKeyboard: true,
+  enableMouse: true
 }

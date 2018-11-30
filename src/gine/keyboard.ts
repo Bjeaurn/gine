@@ -2,6 +2,7 @@ import { fromEvent, merge, Observable } from 'rxjs'
 import { EventTargetLike } from 'rxjs/internal/observable/fromEvent'
 import { filter, map } from 'rxjs/operators'
 import { Gine } from './core'
+import { KEYCODES } from './keyboard.keycodes'
 
 export interface IKeyEvent {
   key: string
@@ -9,6 +10,7 @@ export interface IKeyEvent {
 }
 
 export class Keyboard {
+  static readonly KEYCODES = KEYCODES
   public readonly key$: Observable<IKeyEvent>
 
   private pressed: boolean[] = []
@@ -42,5 +44,13 @@ export class Keyboard {
         return { key: ev.key, type: ev.type } as IKeyEvent
       })
     )
+  }
+
+  allPressed(): boolean[] {
+    return this.pressed
+  }
+
+  isPressed(keycode: number): boolean {
+    return this.pressed[keycode]
   }
 }

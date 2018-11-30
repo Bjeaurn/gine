@@ -1,7 +1,7 @@
 import { Gine } from './core'
 
 export interface IScene {
-  tick(): void
+  tick(delta?: number): void
   frame(): void
   second?(): void
   init?(): void
@@ -13,7 +13,7 @@ export class Scene implements IScene {
 
   constructor() {}
 
-  tick() {}
+  tick(delta?: number) {}
   frame() {}
   destroy() {
     Gine.sendEvent(Scene.DESTROY_CURRENT_SCENE)

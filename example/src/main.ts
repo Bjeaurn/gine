@@ -27,17 +27,20 @@ assets.forEach(d => {
   Gine.store.image(d.name, d.src)
 })
 Gine.store.sprite('player', 'spritesheet-example.png', {
-  widthPerImage: 64,
-  heightPerImage: 64,
-  imagesPerRow: 5,
-  numberOfFrames: 9,
-  ticksPerFrame: 24
-} as SpriteOptions)
+    widthPerImage: 64,
+    heightPerImage: 64,
+    imagesPerRow: 5,
+    numberOfFrames: 9,
+    ticksPerFrame: 24
+  } as SpriteOptions)
 
 const loadingScene = new LoadingScene()
 game.changeScene(loadingScene)
 game.start()
 const mainScene = new MainScene()
+
+Gine.keyboard.key$.subscribe()
+Gine.mouse.mouse$.subscribe()
 
 Gine.events
   .pipe(filter(ev => ev === Scene.DESTROY_CURRENT_SCENE))
