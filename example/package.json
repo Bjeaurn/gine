@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "parcel src/index.html",
+    "dev": "parcel src/index.html --no-hmr",
     "build": "parcel --build src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
