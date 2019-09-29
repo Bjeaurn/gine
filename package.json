@@ -16,8 +16,8 @@
     "lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
-    "es6-shim": "^0.35.4",
-    "rxjs": "^6.3.3"
+    "es6-shim": "^0.35.5",
+    "rxjs": "^6.5.3"
   },
   "peerDependencies": {
     "typescript": "^3.1.6",
@@ -29,8 +29,8 @@
     "parcel-plugin-static-files-copy": "^1.1.0",
     "parcel-plugin-typescript": "^1.0.0",
     "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "typescript": "^3.1.6"
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
   },
   "author": "Bjorn 'Bjeaurn'",
   "license": "ISC"
