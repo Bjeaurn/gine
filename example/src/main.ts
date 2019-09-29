@@ -1,15 +1,8 @@
-import {
-  Gine,
-  Config,
-  GineAsset,
-  Scene,
-  DEFAULT_CONFIG,
-  IConfigArguments,
-  SpriteOptions
-} from 'gine'
+import { Config, DEFAULT_CONFIG, Gine, IConfigArguments, Scene, SpriteOptions } from 'gine'
+import { filter } from 'rxjs/operators'
+
 import { LoadingScene } from './scenes/loading'
 import { MainScene } from './scenes/main'
-import { filter } from 'rxjs/operators'
 
 const cfg: Config = new Config(
   document.querySelector('#game') as HTMLCanvasElement,
