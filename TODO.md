@@ -6,7 +6,3 @@
 - AI basics
 - DevTools
   - CLI
-
-
-Type assets!
-
