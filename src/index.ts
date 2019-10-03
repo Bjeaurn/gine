@@ -12,3 +12,5 @@ export * from './gine/tile'
 export * from './gine/scene'
 export * from './gine/store'
 export * from './gine/keyboard.keycodes'
+
+export * from './gine/math'
