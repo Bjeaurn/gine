@@ -13,7 +13,8 @@
   "scripts": {
     "start": "npm run build",
     "build": "npm run lint && rm -rf dist/ && tsc && echo 'Build completed, check your dist/ folder!'",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest"
   },
   "dependencies": {
     "es6-shim": "^0.35.5",
@@ -24,10 +25,13 @@
     "rxjs": "^6.3.3"
   },
   "devDependencies": {
+    "@types/jest": "24.0.18",
     "http-server": "^0.11.1",
+    "jest": "24.9.0",
     "parcel": "^1.12.3",
     "parcel-plugin-static-files-copy": "^1.1.0",
     "parcel-plugin-typescript": "^1.0.0",
+    "ts-jest": "24.1.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.20.0",
     "typescript": "^3.6.3"
