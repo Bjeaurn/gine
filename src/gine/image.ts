@@ -31,7 +31,6 @@ export class Asset implements GineAsset {
         this.image.src = src
 
         this.image.onload = () => {
-            console.log('onloaded')
             this.imageLoaded = true
             this.width = this.image.width
             this.height = this.image.height
@@ -86,7 +85,6 @@ export class SpriteAsset extends Asset {
             options && options.frameIndex ? options.frameIndex : 0
 
         this.image.onload = () => {
-            console.log('onloaded sprite')
             this.imageLoaded = true
             this.maxHeight = this.image.height
             this.maxWidth = this.image.width
