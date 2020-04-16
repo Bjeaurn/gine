@@ -26,7 +26,6 @@ Gine.store.sprite('player', 'spritesheet-example.png', {
     numberOfFrames: 9,
     ticksPerFrame: 24,
 } as SpriteOptions)
-console.log(Gine.store.get('player'))
 
 const loadingScene = new LoadingScene()
 game.changeScene(loadingScene)

@@ -52,6 +52,12 @@ export class ImageAsset extends Asset {
     public update() {}
 }
 
+export interface SpriteAnimation {
+    name: string
+    indexStart: number
+    indexEnd: number
+}
+
 export class SpriteAsset extends Asset {
     public type: string = Asset.SPRITE
 
@@ -66,6 +72,8 @@ export class SpriteAsset extends Asset {
     public readonly ticksPerFrame: number = 0
     public currentTick: number = 0
     public currentSpriteIndex: number = 0
+    private animations: SpriteAnimation[] = []
+    private activeAnimation?: SpriteAnimation
 
     constructor(name: string, src: string, options?: SpriteOptions) {
         super(name, src)
@@ -83,7 +91,8 @@ export class SpriteAsset extends Asset {
             options && options.ticksPerFrame ? options.ticksPerFrame : 1
         this.currentSpriteIndex =
             options && options.frameIndex ? options.frameIndex : 0
-
+        if (options?.animations) {
+        }
         this.image.onload = () => {
             this.imageLoaded = true
             this.maxHeight = this.image.height
@@ -99,6 +108,10 @@ export class SpriteAsset extends Asset {
             Math.floor(this.currentSpriteIndex / this.imagesPerRow) * this.sizeY
     }
 
+    saveAnimations(animations: SpriteAnimation[]) {
+        this.animations = animations
+    }
+
     public calculatePerIndex(index: number) {
         if (index > this.numberOfFrames) {
             throw new Error(
@@ -112,11 +125,15 @@ export class SpriteAsset extends Asset {
 
     public update() {
         this.currentTick++
-        if (this.currentTick > this.ticksPerFrame) {
+        if (this.currentTick > this.ticksPerFrame && !this.activeAnimation) {
             this.currentTick = 0
             this.currentSpriteIndex++
             if (this.currentSpriteIndex >= this.numberOfFrames) {
                 this.currentSpriteIndex = 0
+            }
+        } else if (this.activeAnimation) {
+            if (this.currentSpriteIndex >= this.activeAnimation.indexEnd) {
+                this.currentSpriteIndex = this.activeAnimation.indexStart
             }
         }
     }
@@ -135,7 +152,8 @@ export class SpriteOptions extends ImageOptions {
         readonly imagesPerRow?: number,
         readonly numberOfFrames?: number,
         readonly ticksPerFrame?: number,
-        readonly frameIndex?: number
+        readonly frameIndex?: number,
+        readonly animations?: SpriteAnimation[]
     ) {
         super()
     }
