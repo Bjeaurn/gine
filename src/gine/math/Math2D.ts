@@ -1,4 +1,5 @@
-import { Gine, ImageAsset } from 'gine'
+import { Gine } from '../core'
+import { ImageAsset } from '../image'
 
 export class Math2D {
     static rotate(

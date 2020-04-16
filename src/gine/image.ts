@@ -67,6 +67,8 @@ export class SpriteAsset extends Asset {
 
     constructor(name: string, src: string, options?: SpriteOptions) {
         super(name, src)
+        // FIXME - Width/height not being set properly here, should depend on
+        // sizeX and sizeY, not the actual loaded image width.
         this.sizeX =
             options && options.widthPerImage ? options.widthPerImage : 0
         this.sizeY =
