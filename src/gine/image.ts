@@ -31,6 +31,7 @@ export class Asset implements GineAsset {
         this.image.src = src
 
         this.image.onload = () => {
+            console.log('onloaded')
             this.imageLoaded = true
             this.width = this.image.width
             this.height = this.image.height
@@ -57,6 +58,8 @@ export class SpriteAsset extends Asset {
 
     public sizeX: number
     public sizeY: number
+    public maxHeight: number
+    public maxWidth: number
     public sourceX: number
     public sourceY: number
     public imagesPerRow: number
@@ -67,12 +70,12 @@ export class SpriteAsset extends Asset {
 
     constructor(name: string, src: string, options?: SpriteOptions) {
         super(name, src)
-        // FIXME - Width/height not being set properly here, should depend on
-        // sizeX and sizeY, not the actual loaded image width.
         this.sizeX =
             options && options.widthPerImage ? options.widthPerImage : 0
         this.sizeY =
             options && options.heightPerImage ? options.heightPerImage : 0
+        this.width = this.sizeX
+        this.height = this.sizeY
         this.imagesPerRow =
             options && options.imagesPerRow ? options.imagesPerRow : 0
         this.numberOfFrames =
@@ -81,6 +84,13 @@ export class SpriteAsset extends Asset {
             options && options.ticksPerFrame ? options.ticksPerFrame : 1
         this.currentSpriteIndex =
             options && options.frameIndex ? options.frameIndex : 0
+
+        this.image.onload = () => {
+            console.log('onloaded sprite')
+            this.imageLoaded = true
+            this.maxHeight = this.image.height
+            this.maxWidth = this.image.width
+        }
     }
 
     public draw() {

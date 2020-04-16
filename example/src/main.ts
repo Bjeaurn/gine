@@ -16,7 +16,7 @@ const cfg: Config = new Config(
 const game = new Gine(cfg)
 
 const assets: BasicAsset[] = [{ name: 'logo', src: 'logo.png' }]
-assets.forEach(d => {
+assets.forEach((d) => {
     Gine.store.image(d.name, d.src)
 })
 Gine.store.sprite('player', 'spritesheet-example.png', {
@@ -26,6 +26,7 @@ Gine.store.sprite('player', 'spritesheet-example.png', {
     numberOfFrames: 9,
     ticksPerFrame: 24,
 } as SpriteOptions)
+console.log(Gine.store.get('player'))
 
 const loadingScene = new LoadingScene()
 game.changeScene(loadingScene)
@@ -36,9 +37,9 @@ Gine.keyboard.key$.subscribe()
 Gine.mouse.mouse$.subscribe()
 
 Gine.events
-    .pipe(filter(ev => ev === Scene.DESTROY_CURRENT_SCENE))
-    .subscribe(ev => {
+    .pipe(filter((ev) => ev === Scene.DESTROY_CURRENT_SCENE))
+    .subscribe((ev) => {
         game.changeScene(mainScene)
     })
 
-Gine.events.subscribe(ev => console.log(ev))
+Gine.events.subscribe((ev) => console.log(ev))
