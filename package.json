@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "es6-shim": "^0.35.5",
-    "rxjs": "^6.5.3"
+    "rxjs": "^6.5.5"
   },
   "peerDependencies": {
     "typescript": "^3.1.6",
@@ -28,13 +28,13 @@
     "@types/jest": "24.0.18",
     "http-server": "^0.11.1",
     "jest": "24.9.0",
-    "parcel": "^1.12.3",
+    "parcel": "^1.12.4",
     "parcel-plugin-static-files-copy": "^1.1.0",
     "parcel-plugin-typescript": "^1.0.0",
     "ts-jest": "24.1.0",
     "ts-node": "^7.0.1",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.3"
+    "tslint": "^5.20.1",
+    "typescript": "^3.8.3"
   },
   "author": "Bjorn 'Bjeaurn'",
   "license": "ISC"
