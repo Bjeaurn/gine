@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "parcel": "^1.9.7",
-    "parcel-plugin-static-files-copy": "^1.1.0",
+    "parcel-reporter-static-files-copy": "^1.2.2",
     "typescript": "^3.0.1"
   },
   "dependencies": {
