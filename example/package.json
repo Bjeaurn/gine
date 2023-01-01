@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^1.9.7",
+    "parcel": "^2.8.2",
     "parcel-reporter-static-files-copy": "^1.2.2",
     "typescript": "^3.0.1"
   },
